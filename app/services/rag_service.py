@@ -22,9 +22,13 @@ logger = logging.getLogger(__name__)
 
 def create_knowledge_base(db: Session, assistant_id: str, name: str, vector_db_id: str | None = None) -> KnowledgeBase:
     get_assistant(db, assistant_id)
-    # Return existing KB if one already exists for this assistant
+    # Return existing KB for this assistant (one KB per assistant, idempotent)
     existing = db.query(KnowledgeBase).filter(KnowledgeBase.assistant_id == assistant_id).first()
     if existing:
+        if existing.name != name:
+            existing.name = name
+            db.commit()
+            db.refresh(existing)
         return existing
     kb = KnowledgeBase(assistant_id=assistant_id, name=name, vector_db_id=vector_db_id)
     db.add(kb)

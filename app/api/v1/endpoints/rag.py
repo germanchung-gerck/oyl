@@ -1,6 +1,6 @@
 """RAG document management endpoints: upload with OCR, batch process, status."""
 import os
-from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, status, BackgroundTasks
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -28,7 +28,6 @@ MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
 def upload_document_with_ocr(
     assistant_id: str,
     file: UploadFile = File(...),
-    background_tasks: BackgroundTasks = BackgroundTasks(),
     db: Session = Depends(get_db),
 ) -> DocumentUploadResponse:
     """Upload a document and trigger OCR processing pipeline."""

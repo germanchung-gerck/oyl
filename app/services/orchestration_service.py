@@ -3,7 +3,7 @@ import time
 from typing import Any
 from sqlalchemy.orm import Session
 
-import ollama as ollama
+import ollama
 
 from app.config import settings
 from app.models.teammate import Teammate
