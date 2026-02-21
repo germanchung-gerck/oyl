@@ -22,6 +22,20 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
+    # Ollama
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    OCR_MODEL: str = "deepseek-ocr:latest"
+    EMBEDDING_MODEL: str = "nomic-embed-text:latest"
+    TAGGING_MODEL: str = "neural-chat:7b"
+    REASONING_MODEL: str = "deepseek-r1:8b"
+    FAST_MODEL: str = "qwen3:7b"
+
+    # RAG Pipeline
+    CHUNK_SIZE: int = 500
+    CHUNK_OVERLAP: int = 50
+    TOP_K_CHUNKS: int = 5
+    TAGS_PER_CHUNK: int = 3
+
     class Config:
         env_file = ".env"
 
