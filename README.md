@@ -179,6 +179,34 @@ Services:
 - **Redis**: Port 6379
 - **Chroma**: Port 8000
 
+## 🗃️ Database Migrations (Alembic)
+
+This project uses Alembic for SQLAlchemy schema migrations.
+
+```bash
+# Initialize Alembic (one time)
+alembic init alembic
+
+# Create a migration from model changes
+docker compose exec -T api alembic revision --autogenerate -m "describe change"
+
+# Apply migrations
+docker compose exec -T api alembic upgrade head
+
+# Show current migration revision
+docker compose exec -T api alembic current
+
+# Roll back one revision (if needed)
+docker compose exec -T api alembic downgrade -1
+
+# Verify tables in Postgres
+docker compose exec -T postgres psql -U oyl_user -d oyl_db -c "\dt"
+```
+
+Notes:
+- Run Alembic commands in the `api` container so `DATABASE_URL` host `postgres` resolves correctly.
+- Initial migration file is in `alembic/versions/`.
+
 ## 🧪 Testing
 
 ```bash
