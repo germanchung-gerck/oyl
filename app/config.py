@@ -17,6 +17,20 @@ class Settings(BaseSettings):
     CHROMA_HOST: str = "localhost"
     CHROMA_PORT: int = 8000
 
+    # Ollama
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    OLLAMA_OCR_MODEL: str = "deepseek-r1:7b"
+    OLLAMA_TAGGING_MODEL: str = "neural-chat:7b"
+    OLLAMA_EMBEDDING_MODEL: str = "nomic-embed-text"
+    OLLAMA_REASONING_MODEL: str = "deepseek-r1:7b"
+    OLLAMA_FAST_MODEL: str = "qwen2.5:7b"
+    OLLAMA_TIMEOUT: int = 120
+
+    # RAG
+    CHUNK_SIZE: int = 1000
+    CHUNK_OVERLAP: int = 200
+    MAX_RETRIEVED_CHUNKS: int = 5
+
     # JWT
     SECRET_KEY: str = "change-me-in-production"
     ALGORITHM: str = "HS256"
